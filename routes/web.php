@@ -15,13 +15,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/products', 'ProductsController@getProducts');
-Route::get('/products/{id}', 'ProductsController@getProductsById');
 Route::get('/categories', 'CategoriesController@getCategories');
-
-Route::put('/Categories', 'CategoriesController@updateCategory');
-
-
-Route::delete('/Categories/{id}', 'CategoriesController@destroyCategory');
-
-Route::post('/Products', 'ProductsController@createProduct');
+Route::get('/categories/{id}', 'CategoriesController@getCategoryId');

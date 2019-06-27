@@ -4,14 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Unit extends Model
+class Techinique extends Model
 {
     protected $fillable = [
         'name',
-        'quantity',
             ];
 
-    public function ingredients(){
-    return $this->hasMany('App/Ingredient');
+    public function recipes(){
+    return $this->hasMany('App/Recipe');
     }
 }

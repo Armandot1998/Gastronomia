@@ -4,29 +4,24 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ingredients extends Model
+class Ingredient extends Model
 {
     protected $fillable = [
         'quantity',
         'description',
         'cost',
-        ];
+            ];
 
+    public function category(){
+    return $this->belongsTo('App/Product');
+    }
 
-Public function unit() {
+    public function unit(){
+    return $this->belongsTo('App/Unit');
+    }
 
-    return belongsTo('App\unit');        
-}
-
-Public function product() {
-
-    return belongsTo('App\product');        
-}
-
-
-
-Public function products() {
-
-    return $this->hasMany('App\recipe');
-} 
+    public function recipe(){
+    return $this->belongsTo('App/Recipe');
+    }
+ 
 }
