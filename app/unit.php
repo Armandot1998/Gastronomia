@@ -9,9 +9,10 @@ class Unit extends Model
     protected $fillable = [
         'name',
         'quantity',
-            ];
+        'isactive',
+        ];
 
-    public function ingredients(){
-    return $this->hasMany('App/Ingredient');
-    }
+        public function ingredients(){
+            return $this->hasMany('App/Ingredient');
+            }
 }

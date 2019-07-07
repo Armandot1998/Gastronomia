@@ -13,11 +13,12 @@ class CreateProcessTable extends Migration
      */
     public function up()
     {
-        Schema::create('process', function (Blueprint $table) {
+        Schema::create('processes', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
             $table->string('description', 100);
             $table->integer('order');
+            $table->boolean('isactive');
             $table->integer('recipes_id');
             $table->foreign('recipes_id')->references("id")->on("recipes");
 

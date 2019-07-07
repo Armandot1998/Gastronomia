@@ -4,20 +4,31 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class recipes extends Model
+class Recipe extends Model
 {
     protected $fillable = [
         'name',
         'document_no',
         'preparedness',
         'pax',
+        'isactive',
         ];
 
+        Public function category() {
+            return belongsTo('App\Category');
+        } 
+
+        public function technique(){
+            return belongsTo('App/Technique');
+        }
         
-Public function category() {
+        public function process(){
+            return $this->hasMany('App/Process');
+        }
 
-        return belongsTo('App\ingredient');
-    
-    } 
-
+        public function ingredients(){
+            return $this->hasMany('App/Ingredient');
+        }
+        
+           
 }

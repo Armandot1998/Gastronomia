@@ -20,6 +20,7 @@ class CreateRecipesTable extends Migration
             $table->integer('document_no');
             $table->string('preparedness', 200);
             $table->integer('pax');
+            $table->boolean('isactive');
             $table->integer('techniques_id');
             $table->foreign('techniques_id')->references("id")->on("techniques");
 

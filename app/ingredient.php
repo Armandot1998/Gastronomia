@@ -10,18 +10,20 @@ class Ingredient extends Model
         'quantity',
         'description',
         'cost',
-            ];
+        'isactive',
+        ];
+        
 
-    public function category(){
-    return $this->belongsTo('App/Product');
-    }
-
-    public function unit(){
+  public function product(){
+   return $this->belongsTo('App/Product');
+  }
+        
+   public function unit(){
     return $this->belongsTo('App/Unit');
-    }
-
-    public function recipe(){
+  }
+        
+   public function recipe(){
     return $this->belongsTo('App/Recipe');
-    }
- 
+  }
+         
 }

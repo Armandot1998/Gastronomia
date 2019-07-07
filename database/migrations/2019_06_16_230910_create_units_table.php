@@ -18,6 +18,8 @@ class CreateUnitsTable extends Migration
             $table->timestamps();
             $table->string('name', 100);
             $table->integer('quantity');
+            $table->boolean('isactive');
+
 
 
             

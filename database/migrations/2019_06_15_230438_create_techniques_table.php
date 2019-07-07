@@ -17,6 +17,7 @@ class CreateTechniquesTable extends Migration
             $table->bigIncrements('id');
             $table->timestamps();
             $table->string('name', 100);
+            $table->boolean('isactive');
 
         });
     }
