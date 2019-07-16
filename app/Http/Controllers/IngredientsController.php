@@ -31,7 +31,7 @@ class IngredientsController extends Controller
         $product = Product::find($dataProduct['id']);
         $recipe = Recipe::find($dataRecipe['id']);
         $unit = Unit::find($dataUnit['id']);
-        $response =  $product->product() || $recipe->recipe() || $unit->unit()->create([
+        $response =  $product->product() && $recipe->recipe() && $unit->unit()->create([
         'quantity'=>$dataProduct['name'],
         'description'=>$dataProduct['description'],
         'cost'=>$dataProduct['cost'],

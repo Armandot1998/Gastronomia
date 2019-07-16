@@ -9,10 +9,10 @@ class Process extends Model
     protected $fillable = [
         'description',
         'order',
-        'isactive',
+        'state',
         ];
 
         public function recipe(){
-            return $this->belongsTo('App/Recipe');
+            return $this->belongsTo('App\Recipe');
             }
 }

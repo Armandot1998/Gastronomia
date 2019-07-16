@@ -17,7 +17,7 @@ class CreateProductsTable extends Migration
             $table->bigIncrements('id');
             $table->timestamps();
             $table->string('name', 100);
-            $table->boolean('isactive');
+            $table->string('state',10);
             $table->integer('category_id');
             $table->foreign('category_id')->references("id")->on("categories");
 

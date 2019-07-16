@@ -18,7 +18,7 @@ class CreateProcessTable extends Migration
             $table->timestamps();
             $table->string('description', 100);
             $table->integer('order');
-            $table->boolean('isactive');
+            $table->string('state',10);
             $table->integer('recipes_id');
             $table->foreign('recipes_id')->references("id")->on("recipes");
 

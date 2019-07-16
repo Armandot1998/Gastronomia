@@ -11,7 +11,7 @@ class Recipe extends Model
         'document_no',
         'preparedness',
         'pax',
-        'isactive',
+        'state',
         ];
 
         Public function category() {
@@ -19,15 +19,15 @@ class Recipe extends Model
         } 
 
         public function technique(){
-            return belongsTo('App/Technique');
+            return belongsTo('App\Technique');
         }
         
         public function process(){
-            return $this->hasMany('App/Process');
+            return $this->hasMany('App\Process');
         }
 
         public function ingredients(){
-            return $this->hasMany('App/Ingredient');
+            return $this->hasMany('App\Ingredient');
         }
         
            

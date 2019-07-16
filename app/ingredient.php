@@ -10,12 +10,12 @@ class Ingredient extends Model
         'quantity',
         'description',
         'cost',
-        'isactive',
+        'state',
         ];
         
 
   public function product(){
-   return $this->belongsTo('App/Product');
+   return $this->belongsTo('App\Product');
   }
         
    public function unit(){

@@ -8,7 +8,7 @@ class Product extends Model
 {
     protected $fillable = [
     'name',
-    'isactive',      
+    'state',      
     ];
     
     Public function category() {
@@ -16,7 +16,7 @@ class Product extends Model
     } 
 
     public function ingredients(){
-        return $this->hasMany('App/Ingredient');
+        return $this->hasMany('App\Ingredient');
      } 
 
 }

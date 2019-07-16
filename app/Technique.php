@@ -8,10 +8,10 @@ class Technique extends Model
 {
     protected $fillable = [
         'name',
-        'isactive',
+        'state',
         ];
 
         public function recipes(){
-            return $this->hasMany('App/Recipe');
+            return $this->hasMany('App\Recipe');
         }    
 }

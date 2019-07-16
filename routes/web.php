@@ -14,11 +14,13 @@
 Route::get('/', function () {
     return view('welcome');
 });
-
+///////////////////Controller Category//////////////////////////////////////////
 Route::get('/categories', 'CategoriesController@getCategories');
-Route::get('/category/{id}', 'CategoriesController@getCategoryById');
-Route::post('/categories', 'CategoriesController@postCategories');
-Route::put('/category/{id}', 'CategoriesController@putCategory');
+Route::get('/categories', 'CategoriesController@getCategoryById');
+Route::post('/categories', 'CategoriesController@postCategory');
+Route::put('/categories', 'CategoriesController@putCategory');
+////////////////////////////////////////////////////////////////////////////////
+
 
 Route::get('/products', 'ProductsController@getProducts');
 Route::get('/product/{id}', 'ProductsController@getProductById');

@@ -17,7 +17,7 @@ class CreateCategoriesTable extends Migration
             $table->bigIncrements('id');
             $table->timestamps();
             $table->string('name', 100);
-            $table->boolean('isactive');
+            $table->string('state',10);
 
         });
     }

@@ -12,24 +12,28 @@ class CategoriesController extends Controller
      
     }
     
-    public function getCategoryById($id){
-        $categories = Category::where('id', '=', $id)->get();
-        return response()->json(['categories' => $categories], 200);     
+    public function getCategoryById(Request $request){
+        $dataBodyClient = $request->json()->all();
+        $dataCategory = $dataBodyClient['category']; 
+        $category = Category::findOrFail($dataCategory['id']);
+        return response()->json(['category'=>$category],200); 
+
+
     } 
 
-    public function postCategories(Request $request){
-        $categories = new Category();
-        $categories->name = $request->name;
-        $categories->isactive = $request->isactive;
-        $categories->save();
-        return response()->json(['Categories' => $categories], 200);  
+    public function postCategory(Request $request){
+        $category = new Category();
+        $category->name= $request->name;
+        $category->state= $request->state;
+        $category->save();      
+        return response()->json(['categories' => $category], 200);        
     } 
     
-    public function putCategory(Request $request, $id){
-        $category = Category::find($id);
-        $response = $category->update([
-            "name"=>$request->name,
-            "isactive"=>$request->isactive]);
-        return response()->json($response, 201); 
+    public function putCategory(Request $request){
+        $dataBodyClient = $request->json()->all();
+        $dataCategory = $dataBodyClient['category']; 
+        $category = Category::find($dataCategory['id']);
+        $category->update($request->all());
+        return response()->json(['category'=>$category],200); 
     }
 }

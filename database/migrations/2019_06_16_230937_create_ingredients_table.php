@@ -22,7 +22,7 @@ class CreateIngredientsTable extends Migration
             $table->integer('recipe_id');
             $table->integer('unit_id');
             $table->integer('product_id');
-            $table->boolean('isactive');
+            $table->string('state',10);
             $table->foreign('recipe_id')->references("id")->on("recipes");
             $table->foreign('unit_id')->references("id")->on("units");
             $table->foreign('product_id')->references("id")->on("products");
