@@ -12,32 +12,35 @@ class ProductsController extends Controller
 {
     public function getProducts(){
         $products = Product::all();
-        return response()->json(['products' => $products], 200);
+        return response()->json(['Products' => $products], 200);
     } 
 
-    public function getProductById($id){
-        $products = Product::where('id', '=', $id)->get();
-        return response()->json(['products' => $products], 200);     
+    public function getProductById(Request $request){
+        $dataBodyClient = $request->json()->all();
+        $dataCategory = $dataBodyClient['product']; 
+        $category = Product::findOrFail($dataCategory['id']);
+        return response()->json(['product'=>$category],200);     
     } 
  
-    public function postProducts(Request $request){
+    public function postProduct(Request $request){
         $dataBodyClient = $request->json()->all();
         $dataProduct=$dataBodyClient['product'];
         $dataCategory=$dataBodyClient['categories'];
-
-        $category = Category::find($dataCategory['id']);
-        $response =  $category->products()->create([
+        $category = Category::findOrFail($dataCategory['id']);
+        $product = $category->products()->create([
         'name'=>$dataProduct['name'],
-        'isactive'=>$dataProduct['isactive']]);
-        return $response;
+        'state'=>$dataProduct['state']]);
+        return $product;
     }
 
-    public function putProduct(Request $request, $id){
-        $product = Product::find($id);
+    public function putProduct(Request $request){
+        $dataBodyClient = $request->json()->all();
+        $dataProduct = $dataBodyClient['product']; 
+        $product = Product::find($dataProduct['id']);
         $response = $product->update([
-            "name"=>$request->name,
-            "isactive"=>$request->isactive,
-            "category_id"=>$request->category_id]);
+            "name"=>$dataProduct['name'],
+            "state"=>$dataProduct['state'],
+            "category_id"=>$dataProduct['category_id']]);
         return response()->json($response, 201); 
     }
 

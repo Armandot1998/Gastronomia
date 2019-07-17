@@ -22,11 +22,14 @@ class CategoriesController extends Controller
     } 
 
     public function postCategory(Request $request){
-        $category = new Category();
-        $category->name= $request->name;
-        $category->state= $request->state;
-        $category->save();      
-        return response()->json(['categories' => $category], 200);        
+        $dataBodyClient = $request->json()->all();
+        $dataCategory=$dataBodyClient['category'];
+        $category= Category::create([
+            'name'=>$dataCategory['name'],
+            'state'=>$dataCategory['state']]);
+        return response()->json(['category'=>$category],200);
+        
+          
     } 
     
     public function putCategory(Request $request){
@@ -34,6 +37,17 @@ class CategoriesController extends Controller
         $dataCategory = $dataBodyClient['category']; 
         $category = Category::find($dataCategory['id']);
         $category->update($request->all());
-        return response()->json(['category'=>$category],200); 
+        return response()->json($category, 201); 
+    
+    }
+
+    public function DeleteCategory(Request $request){
+        $dataBodyClient = $request->json()->all();
+        $dataCategory = $dataBodyClient['category']; 
+        $category = Category::find($dataCategory['id']);
+        $category->update([
+            'state'=>$dataCategory['state']]);
+        return response()->json($category, 201); 
+    
     }
 }
