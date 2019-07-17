@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 class CategoriesController extends Controller
 {
     public function getCategories(){
-        $categories = Category::all();
+        $categories = Category::where('state', '=','active')->get();
         return response()->json(['Categories' => $categories], 200);
      
     }

@@ -11,7 +11,7 @@ use App\Category;
 class ProductsController extends Controller
 {
     public function getProducts(){
-        $products = Product::all();
+        $products = Product::where('state', '=','active')->get();
         return response()->json(['Products' => $products], 200);
     } 
 
