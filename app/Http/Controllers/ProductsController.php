@@ -11,37 +11,37 @@ use App\Category;
 class ProductsController extends Controller
 {
     public function getProducts(){
-        $products = Product::where('state', '=','active')->get();
+        $products = Product::where('state', '=','Active')->get();
         return response()->json(['Products' => $products], 200);
     } 
 
-    public function getProductById(Request $request){
+    public function getProductByName(Request $request){
         $dataBodyClient = $request->json()->all();
-        $dataCategory = $dataBodyClient['product']; 
-        $category = Product::findOrFail($dataCategory['id']);
-        return response()->json(['product'=>$category],200);     
+        $dataProduct = $dataBodyClient['Product']; 
+        $product = Product::where('name', '=',$dataProduct['name'])->get();
+        return response()->json(['Product'=>$ $product],200);     
     } 
  
     public function postProduct(Request $request){
         $dataBodyClient = $request->json()->all();
-        $dataProduct=$dataBodyClient['product'];
-        $dataCategory=$dataBodyClient['categories'];
+        $dataProduct=$dataBodyClient['Product'];
+        $dataCategory=$dataBodyClient['Category'];
         $category = Category::findOrFail($dataCategory['id']);
         $product = $category->products()->create([
         'name'=>$dataProduct['name'],
         'state'=>$dataProduct['state']]);
-        return $product;
+        return 'Operation Sucssesfull!!'; 
     }
 
     public function putProduct(Request $request){
         $dataBodyClient = $request->json()->all();
-        $dataProduct = $dataBodyClient['product']; 
+        $dataProduct = $dataBodyClient['Product']; 
         $product = Product::find($dataProduct['id']);
         $response = $product->update([
             "name"=>$dataProduct['name'],
             "state"=>$dataProduct['state'],
             "category_id"=>$dataProduct['category_id']]);
-        return response()->json($response, 201); 
+        return 'Operation Sucssesfull!!';
     }
 
 }

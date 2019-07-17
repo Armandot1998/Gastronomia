@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 class CategoriesController extends Controller
 {
     public function getCategories(){
-        $categories = Category::where('state', '=','active')->get();
+        $categories = Category::where('state', '=','Active')->get();
         return response()->json(['Categories' => $categories], 200);
      
     }
@@ -27,9 +27,7 @@ class CategoriesController extends Controller
         $category= Category::create([
             'name'=>$dataCategory['name'],
             'state'=>$dataCategory['state']]);
-        return response()->json(['category'=>$category],200);
-        
-          
+            return 'Operation Sucssesfull!!';     
     } 
     
     public function putCategory(Request $request){
@@ -37,7 +35,7 @@ class CategoriesController extends Controller
         $dataCategory = $dataBodyClient['category']; 
         $category = Category::find($dataCategory['id']);
         $category->update($request->all());
-        return response()->json($category, 201); 
+        return 'Operation Sucssesfull!!'; 
     
     }
 
@@ -47,7 +45,7 @@ class CategoriesController extends Controller
         $category = Category::find($dataCategory['id']);
         $category->update([
             'state'=>$dataCategory['state']]);
-        return response()->json($category, 201); 
+        return 'Operation Sucssesfull!!'; 
     
     }
 }
