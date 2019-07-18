@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class TechniquesController extends Controller
 {
     public function getTechniques(){
-        $techniques = Technique::all();
+        $techniques = Technique::where('state', '=','active')->get();
         return response()->json(['techniques' => $techniques], 200);
     }
 
@@ -23,10 +23,10 @@ class TechniquesController extends Controller
     public function postTechniques(Request $request){
         $dataBodyClient = $request->json()->all();
         $dataTechnique=$dataBodyClient['technique'];
-
-        $techniques = new Technique();
-        $techniques->create($request->all());
-        return response()->json(['techniques' => $techniques], 200);  
+        $technique= Technique::create([
+            'name'=>$dataTechnique['name'],
+            'state'=>$dataTechnique['state']]);
+        return response()->json(['technique'=>$technique],200);
     } 
     
     public function putTechnique(Request $request){
@@ -34,9 +34,17 @@ class TechniquesController extends Controller
         $dataTechnique = $dataBodyClient['technique']; 
         $technique = Technique::find($dataTechnique['id']);
         $technique->update([
-            "name"=>$dataTechnique['name'],
-            "state"=>$dataTechnique['state'],
-        ]);
-        return response()->json($technique, 201); 
+            'name'=>$dataTechnique['name'],
+            'state'=>$dataTechnique['state']]);
+        return response()->json($technique  , 201); 
+    }
+
+    public function deleteTechnique(Request $request){
+        $dataBodyClient = $request->json()->all();
+        $dataTechnique = $dataBodyClient['technique']; 
+        $technique = Technique::find($dataTechnique['id']);
+        $technique->update([
+            'state'=>$dataTechnique['state']]);
+        return response()->json($technique  , 201); 
     }
 }

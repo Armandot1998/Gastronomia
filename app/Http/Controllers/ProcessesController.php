@@ -9,25 +9,26 @@ use Illuminate\Http\Request;
 class ProcessesController extends Controller
 {
     public function getProcesses(){
-        $processes = Process::all();
+        $processes = Process::where('state', '=','active')->get();
         return response()->json(['Process' => $processes], 200);
     }
 
-    public function getProcesseById($id){
-        $processes = Process::where('id', '=', $id)->get();
-        return response()->json(['processes' => $processes], 200);     
+    public function getProcesseById(Request $request){
+        $dataBodyClient = $request->json()->all();
+        $dataProcess = $dataBodyClient['process']; 
+        $process = Process::findOrFail($dataProcess['id']);
+        return response()->json(['process'=>$process],200);       
     } 
 
     public function postProcesses(Request $request){
         $dataBodyClient = $request->json()->all();
         $dataProcess=$dataBodyClient['process'];
         $dataRecipe=$dataBodyClient['recipe'];
-
         $recipe = Recipe::find($dataRecipe['id']);
         $response =  $recipe->process()->create([
         'description'=>$dataProcess['description'],
         'order'=>$dataProcess['order'],
-        'isactive'=>$dataProcess['isactive']]);
+        'state'=>$dataProcess['state']]);
         return $response;
     }
     
@@ -35,7 +36,7 @@ class ProcessesController extends Controller
         $process = Process::find($id);
         $response = $process->update([
             "description"=>$request->description,
-            "order"=>$request->order,
+            "order"=>$request->order, 
             "isactive"=>$request->isactive]);
         return response()->json($response, 201); 
     }

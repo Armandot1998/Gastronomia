@@ -8,30 +8,45 @@ use Illuminate\Http\Request;
 class UnitsController extends Controller
 {
     public function getUnits(){
-        $units = Unit::all();
-        return response()->json(['Units' => $units], 200);
+        $units = Unit::where('state', '=','active')->get();;
+        return response()->json(['units' => $units], 200);
     }
     
-    public function getUnitById($id){
-        $units = Unit::where('id', '=', $id)->get();
-        return response()->json(['Units' => $units], 200);     
+    public function getUnitById(Request $request){
+        $dataBodyClient = $request->json()->all();
+        $dataUnit = $dataBodyClient['unit']; 
+        $unit = Unit::findOrFail($dataUnit['id']);
+        return response()->json(['unit'=>$unit],200);     
     } 
 
     public function postUnits(Request $request){
-        $units = new Unit();
-        $units->name = $request->name;
-        $units->quantity = $request->quantity;
-        $units->isactive = $request->isactive;
-        $units->save();
-        return response()->json(['Units' => $units], 200);  
+        $dataBodyClient = $request->json()->all();
+        $dataUnit=$dataBodyClient['unit'];
+        $unit= Unit::create([
+            'name'=>$dataUnit['name'],
+            'quantity'=>$dataUnit['quantity'],
+            'state'=>$dataUnit['state']]);
+        return response()->json(['unit'=>$unit],200);
     } 
     
-    public function putUnit(Request $request, $id){
-        $units = Unit::find($id);
-        $response =$units->update([
-            "name"=>$request->name,
-            "quantity"=>$request->quantity,
-            "isactive"=>$request->isactive]);
-        return response()->json($response, 201); 
+    public function putUnit(Request $request){
+        $dataBodyClient = $request->json()->all();
+        $dataUnit = $dataBodyClient['unit']; 
+        $unit = Unit::findOrFail($dataUnit['id']);
+        $unit->update([
+            'name'=>$dataUnit['name'],
+            'quantity'=>$dataUnit['quantity'],
+            'state'=>$dataUnit['state']]);
+        return response()->json($unit, 201); 
     }
+
+    public function deleteUnit(Request $request){
+        $dataBodyClient = $request->json()->all();
+        $dataUnit = $dataBodyClient['unit']; 
+        $unit = Unit::findOrFail($dataUnit['id']);
+        $unit->update([
+            'state'=>$dataUnit['state']]);
+        return response()->json($unit, 201); 
+    }
+
 }
