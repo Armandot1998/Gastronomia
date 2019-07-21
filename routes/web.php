@@ -31,7 +31,7 @@ Route::put('/techniques/deleteById', 'TechniquesController@deleteTechnique');
 
 /*--------------------------------RECIPE CONTROLLER--------------------------------*/ 
 Route::get('/recipes', 'RecipesController@getRecipes');
-Route::get('/recipe/{id}', 'RecipesController@getRecipeById');
+Route::get('/recipe/filtredById', 'RecipesController@getRecipeById');
 Route::post('/recipes', 'RecipesController@postRecipes');
 Route::put('/recipe/{id}', 'RecipesController@putRecipe');
 

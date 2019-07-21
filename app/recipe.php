@@ -14,10 +14,6 @@ class Recipe extends Model
         'recipe_state',
         ];
 
-        Public function category() {
-            return belongsTo('App\Category');
-        } 
-
         public function technique(){
             return belongsTo('App\Technique');
         }

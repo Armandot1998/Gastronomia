@@ -3,36 +3,51 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Recipe;
+use App\recipe;
 use App\Technique;
 
 class RecipesController extends Controller
 {
     public function getRecipes(){
-        $recipes = Recipe::where('state', '=','active')->get();
-        return response()->json(['recipes' => $recipes], 200);
+        $recipes = Recipe::where('recipe_state', '=','Activo')->get();
+        return response()->json(['Recipes' => $recipes], 200);
     }
 
     public function getRecipeById(Request $request){
         $dataBodyClient = $request->json()->all();
-        $dataRecipe = $dataBodyClient['recipe']; 
+        $dataRecipe = $dataBodyClient['Recipe']; 
         $recipe = Recipe::findOrFail($dataRecipe['id']);
-        return response()->json(['recipe'=>$recipe],200);     
+        return response()->json(['Recipe'=>$recipe],200);     
     } 
 
     public function postRecipes(Request $request){
         $dataBodyClient = $request->json()->all();
-        $dataRecipe=$dataBodyClient['recipe'];
-        $dataTechnique=$dataBodyClient['technique'];
+        $dataRecipe=$dataBodyClient['Recipe'];
+        $dataTechnique=$dataBodyClient['Technique'];
+        $technique = Technique::findOrFail($dataTechnique['id']);
+        $recipe = $technique->recipes()->create([
+        'recipe_name'=>$dataRecipe['recipe_name'],
+        'recipe_document_no'=>$dataRecipe['recipe_document_no'],
+        'recipe_preparedness'=>$dataRecipe['recipe_preparedness'],
+        'recipe_pax'=>$dataRecipe['recipe_pax'],
+        'recipe_state'=>$dataRecipe['recipe_state']]);
+
+        return 'Operation Sucssesfull!!'; 
+    }
+
+/*    public function postRecipes(Request $request){
+        $dataBodyClient = $request->json()->all();
+        $dataRecipe=$dataBodyClient['Recipe'];
+        $dataTechnique=$dataBodyClient['Technique'];
         $technique = Technique::find($dataTechnique['id']);
         $response =  $technique->recipes()->create([
-        'name'=> $dataRecipe['name'],
-        'document_no'=> $dataRecipe['document_no'],
-        'preparedness'=> $dataRecipe['preparedness'],
-        'pax'=> $dataRecipe['pax'],
-        'state'=> $dataRecipe['state']]);
+        'recipe_name'=> $dataRecipe['recipe_name'],
+        'recipe_document_no'=> $dataRecipe['recipe_document_no'],
+        'recipe_preparedness'=> $dataRecipe['recipe_preparedness'],
+        'recipe_pax'=> $dataRecipe['recipe_pax'],
+        'recipe_state'=> $dataRecipe['recipe_state']]);
         return $response;
-    }
+    }*/
 
     public function putRecipe(Request $request, $id){
         $recipe = Recipe::find($id);
