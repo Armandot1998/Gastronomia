@@ -16,9 +16,9 @@ class CreateProcessTable extends Migration
         Schema::create('processes', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
-            $table->string('description', 100);
-            $table->integer('order');
-            $table->string('state',10);
+            $table->string('process_description', 100);
+            $table->integer('process_order');
+            $table->string('process_state',10);
             $table->integer('recipes_id');
             $table->foreign('recipes_id')->references("id")->on("recipes");
 

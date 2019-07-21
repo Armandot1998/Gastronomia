@@ -13,6 +13,6 @@ class Process extends Model
         ];
 
         public function recipe(){
-            return $this->belongsTo('App\Recipe');
+            return $this->belongsTo('App\recipe');
             }
 }

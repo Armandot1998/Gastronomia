@@ -7,14 +7,14 @@ use Illuminate\Http\Request;
 class CategoriesController extends Controller
 {
     public function getCategories(){
-        $categories = Category::where('state', '=','Active')->get();
+        $categories = Category::where('category_state', '=','Activo')->get();
         return response()->json(['Categories' => $categories], 200);
      
     }
     
     public function getCategoryById(Request $request){
         $dataBodyClient = $request->json()->all();
-        $dataCategory = $dataBodyClient['category']; 
+        $dataCategory = $dataBodyClient['Category']; 
         $category = Category::findOrFail($dataCategory['id']);
         return response()->json(['category'=>$category],200); 
 
@@ -23,16 +23,16 @@ class CategoriesController extends Controller
 
     public function postCategory(Request $request){
         $dataBodyClient = $request->json()->all();
-        $dataCategory=$dataBodyClient['category'];
+        $dataCategory=$dataBodyClient['Category'];
         $category= Category::create([
-            'name'=>$dataCategory['name'],
-            'state'=>$dataCategory['state']]);
+            'category_name'=>$dataCategory['category_name'],
+            'category_state'=>$dataCategory['category_state']]);
             return 'Operation Sucssesfull!!';     
     } 
     
     public function putCategory(Request $request){
         $dataBodyClient = $request->json()->all();
-        $dataCategory = $dataBodyClient['category']; 
+        $dataCategory = $dataBodyClient['Category']; 
         $category = Category::find($dataCategory['id']);
         $category->update($request->all());
         return 'Operation Sucssesfull!!'; 
@@ -41,10 +41,10 @@ class CategoriesController extends Controller
 
     public function DeleteCategory(Request $request){
         $dataBodyClient = $request->json()->all();
-        $dataCategory = $dataBodyClient['category']; 
+        $dataCategory = $dataBodyClient['Category']; 
         $category = Category::find($dataCategory['id']);
         $category->update([
-            'state'=>$dataCategory['state']]);
+            'category_state'=>$dataCategory['category_state']]);
         return 'Operation Sucssesfull!!'; 
     
     }

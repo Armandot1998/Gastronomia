@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Technique extends Model
 {
     protected $fillable = [
-        'name',
-        'state',
+        'technique_name',
+        'technique_state',
         ];
 
         public function recipes(){

@@ -16,8 +16,8 @@ class CreateTechniquesTable extends Migration
         Schema::create('techniques', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
-            $table->string('name', 100);
-            $table->string('state',10);     
+            $table->string('technique_name', 100);
+            $table->string('technique_state',10);     
 
         });
     }

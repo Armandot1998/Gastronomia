@@ -8,8 +8,8 @@ class Category extends Model
 {
 
     protected $fillable = [
-        'name',
-        'state'
+        'category_name',
+        'category_state'
         ];
 
 

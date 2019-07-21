@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Recipe extends Model
 {
     protected $fillable = [
-        'name',
-        'document_no',
-        'preparedness',
-        'pax',
-        'state',
+        'recipe_name',
+        'recipe_document_no',
+        'recipe_preparedness',
+        'recipe_pax',
+        'recipe_state',
         ];
 
         Public function category() {

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Process;
-use App\Recipe;
+use App\recipe;
 use Illuminate\Http\Request;
 
 class ProcessesController extends Controller
@@ -22,8 +22,8 @@ class ProcessesController extends Controller
 
     public function postProcesses(Request $request){
         $dataBodyClient = $request->json()->all();
-        $dataProcess=$dataBodyClient['process'];
-        $dataRecipe=$dataBodyClient['recipe'];
+        $dataProcess=$dataBodyClient['Process'];
+        $dataRecipe=$dataBodyClient['Recipe'];
         $recipe = Recipe::find($dataRecipe['id']);
         $response =  $recipe->process()->create([
         'description'=>$dataProcess['description'],
@@ -40,4 +40,5 @@ class ProcessesController extends Controller
             "isactive"=>$request->isactive]);
         return response()->json($response, 201); 
     }
+
 }
