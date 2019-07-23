@@ -12,9 +12,10 @@ Route::put('/categories/deleteById', 'CategoriesController@DeleteCategory');
 
 /*--------------------------------PRODUCT CONTROLLER--------------------------------*/ 
 Route::get('/products', 'ProductsController@getProducts');
-Route::get('/product/{id}', 'ProductsController@getProductById');
+Route::get('/product/filtredByName', 'ProductsController@getProductByName');
 Route::post('/products', 'ProductsController@postProduct');
 Route::put('/products', 'ProductsController@putProduct');
+Route::delete('/products', 'ProductsController@deleteProduct');
 
 /*--------------------------------INGREDIENT CONTROLLER--------------------------------*/ 
 Route::get('/ingredients', 'IngredientsController@getIngredients');
