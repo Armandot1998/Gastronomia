@@ -6,24 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Ingredient extends Model
 {
-    protected $fillable = [
-        'quantity',
-        'description',
-        'cost',
-        'state',
-        ];
-        
-
-  public function product(){
-   return $this->belongsTo('App\Product');
-  }
-        
-   public function unit(){
-    return $this->belongsTo('App/Unit');
-  }
-        
-   public function recipe(){
-    return $this->belongsTo('App/Recipe');
-  }
-         
+    Public function product() {
+        return $this->belongsTo('App\Product');
+    } 
+    Public function recipe() {
+        return $this->belongsTo('App\Recipe');
+    } 
 }

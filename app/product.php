@@ -7,16 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     protected $fillable = [
-    'product_name',
-    'product_state',      
+        'product_name', 
+        'category_name',
+        'cost',
     ];
-    
-    Public function category() {
-        return $this->belongsTo('App\Category');
-    } 
 
-    public function ingredients(){
+    Public function ingredients() {
         return $this->hasMany('App\Ingredient');
-     } 
+    } 
 
 }
