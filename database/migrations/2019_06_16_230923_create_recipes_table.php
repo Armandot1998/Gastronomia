@@ -17,13 +17,11 @@ class CreateRecipesTable extends Migration
             $table->bigIncrements('id');
             $table->timestamps();
             $table->string('recipe_name', 100);
-            $table->integer('recipe_document_no');
-            $table->string('recipe_preparedness', 200);
-            $table->integer('recipe_pax');
-            $table->string('recipe_state',10);
-            $table->integer('techniques_id');
-            $table->foreign('techniques_id')->references("id")->on("techniques");
-
+            $table->string('technique_name', 100);
+            $table->string('preparedness', 1000);
+            $table->integer('pax');
+            
+            
 
 
         });

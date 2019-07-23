@@ -13,7 +13,13 @@ class ProductsController extends Controller
         $products = Product::get();
         return response()->json(['Products' => $products], 200);
     }
-
+    
+    public function getProductByName(Request $request){
+        $dataBodyClient = $request->json()->all();
+        $dataProduct = $dataBodyClient['Product']; 
+        $product = Product::where('product_name', '=',$dataProduct['product_name'])->get();
+        return response()->json(['Product'=>$ $product],200);     
+    }
     public function postProduct(Request $request){
         $dataBodyClient = $request->json()->all();
         $dataCategory=$dataBodyClient['Product'];
